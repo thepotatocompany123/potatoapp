@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block head_content %}
+        {% include 'head.html' %}
+    {% endblock %}
+
+    <style>
+        /* Improved styling for the Admin Page */
+        .main-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Style for dashboard cards */
+        .dashboard-card {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px; /* Set a fixed width for the cards */
+            height: 200px; /* Set a fixed height for the cards */
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .dashboard-card:hover {
+            transform: scale(1.02);
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: 24px;
+            color: #333;
+        }
+
+        /* Style the "Back" button */
+        .back-button {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    {% block taskbar_content %}
+        {% include 'taskbar.html' %}
+    {% endblock %}
+
+    <br>
+
+    <div class="main-content">
+        <h2>Welcome to the Admin Page!</h2>
+
+        <br>
+
+        <!-- Fake Dashboard -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="dashboard-card">
+                    <h5 class="card-title">Total Users</h5>
+                    <p class="card-text">123</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="dashboard-card">
+                    <h5 class="card-title">Active Users</h5>
+                    <p class="card-text">45</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="dashboard-card">
+                    <h5 class="card-title">Pending Requests</h5>
+                    <p class="card-text">8</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add more dashboard elements here -->
+
+        <!-- Add a "Back" button to return to the previous page -->
+        <a href="{{ url_for('welcome') }}" class="btn btn-primary back-button">Back</a>
+    </div>
+
+    <br><br>
+
+    {% block footer_content %}
+        {% include 'footer.html' %}
+    {% endblock %}
+</body>
+
+</html>

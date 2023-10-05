@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block head_content %}
+        {% include 'head.html' %}
+    {% endblock %}
+
+    <style>
+        /* CSS styles for the question and answer boxes */
+        .qa-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Align left */
+        }
+
+        .question-box,
+        .answer-box {
+            background-color: #EFEFEF; /* Color for question boxes */
+            border: 2px solid #333;
+            padding: 10px;
+            margin: 10px 0; /* Add margin to separate boxes */
+            border-radius: 10px;
+            max-width: 80%;
+            text-align: left; /* Align left */
+        }
+
+        .question-box {
+            background-color: #EFEFEF; /* Color for question boxes */
+        }
+
+        .answer-box {
+            background-color: #DFF0D8; /* Color for answer boxes */
+        }
+
+        /* Style the Q&A section */
+        .qa-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+
+    <script type="text/javascript">
+        var socket;
+
+        function connect() {
+            const url = new URL(location.href);
+            var host = `ws://${url.hostname}:${url.port}/quote`;
+            socket = new WebSocket(host);
+            try {
+
+                socket.onopen = function (msg) {
+                    console.log(msg);
+                    socket.send("getquote");
+                };
+
+                socket.onmessage = function (msg) {
+                    if (typeof msg.data == "string") {
+                        const [question, answer] = msg.data.split('\n'); // Split question and answer
+                        const qaContainer = document.querySelector('.qa-container');
+                        const questionBox = document.createElement('div');
+                        questionBox.className = 'question-box';
+                        questionBox.textContent = question;
+                        const answerBox = document.createElement('div');
+                        answerBox.className = 'answer-box';
+                        answerBox.textContent = answer;
+                        qaContainer.appendChild(questionBox);
+                        qaContainer.appendChild(answerBox);
+                    } else {
+                        alert("Something went wrong.");
+                    }
+                };
+
+                socket.onclose = function (msg) {
+                    return;
+                };
+            } catch (ex) {
+                log(ex);
+            }
+        }
+
+        window.onbeforeunload = function () {
+            try {
+                socket.close();
+                socket = null;
+            } catch (ex) { }
+        };
+        connect();
+    </script>
+</head>
+
+<body>
+    <!-- Include the same taskbar content as in the "index" page -->
+    {% block taskbar_content %}
+        {% include 'taskbar.html' %}
+    {% endblock %}
+
+    <div class="main-content">
+        <section class="qa-section">
+            <h1 class="section-heading">Q&A Section</h1>
+            <br>
+            <p class="lead text-muted">Explore commonly asked questions and their answers about potatoes:</p>
+        </section>
+
+        <div class="container mt-5">
+            <div class="qa-container">
+                <!-- Questions and answers will be inserted here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+    {% block footer_content %}
+        {% include 'footer.html' %}
+    {% endblock %}
+</body>
+
+</html>

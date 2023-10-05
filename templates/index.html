@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block head_content %}
+        {% include 'head.html' %}
+    {% endblock %}
+
+    <style>
+        .expert-info {
+            margin-top: 20px; /* Add margin-top for spacing */
+        }
+
+        /* Add padding to the main content */
+        .main-content {
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    {% block taskbar_content %}
+        {% include 'taskbar.html' %}
+    {% endblock %}
+
+    <div class="main-content">
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">Welcome to Our Potato Enthusiast Web App</h1>
+                <p class="lead text-muted">This is the welcome page of our web application, dedicated to the wonderful world of potatoes. Explore everything potato-related and connect with fellow potato enthusiasts.</p>
+                {% if username %}
+                    <!-- If the user is logged in, show "View Potato Database" button -->
+                    <p>
+                        <a href="/potato_database" class="btn btn-primary my-2">View Potato Database</a>
+                        <a href="/chat" class="btn btn-secondary my-2">Live Chat</a>
+                    </p>
+                {% else %}
+                    <!-- If the user is not logged in, show the login button -->
+                    <p>
+                        <a href="/login" class="btn btn-primary my-2">Login</a>
+                        <a href="/chat" class="btn btn-secondary my-2">Live Chat</a>
+                    </p>
+                {% endif %}
+            </div>
+        </section>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="container mt-3">
+                    <ul class="list-unstyled">
+                        {% set unique_messages = [] %}
+                        {% for message in messages %}
+                            {% if message not in unique_messages %}
+                                {% set _ = unique_messages.append(message) %}
+                                <li class="alert alert-success">
+                                    {% if current_user %}
+                                        {{ message }}: {{ current_user }}
+                                    {% else %}
+                                        {{ message }}
+                                    {% endif %}
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <br><br>
+
+        <!-- Additional filler content -->
+
+        <div class="container">
+            <h2>Featured Potatoes</h2>
+            <br>
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="https://ipcdn.freshop.com/resize?url=https://images.freshop.com/00000000047289/84e7ae2252fdc900d27ec885e5527d8f_large.png&width=512&type=webp&quality=90" alt="Potato 1" class="img-fluid">
+                    <b>The Amazing Potato</b>
+                </div>
+                <div class="col-md-4">
+                    <img src="https://ipcdn.freshop.com/resize?url=https://images.freshop.com/00000000047289/84e7ae2252fdc900d27ec885e5527d8f_large.png&width=512&type=webp&quality=90" alt="Potato 2" class="img-fluid">
+                    <b>The Exotic Potato</b>
+                </div>
+                <div class="col-md-4">
+                    <img src="https://ipcdn.freshop.com/resize?url=https://images.freshop.com/00000000047289/84e7ae2252fdc900d27ec885e5527d8f_large.png&width=512&type=webp&quality=90" alt="Potato 3" class="img-fluid">
+                    <b>The Rare Potato</b>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <br><br><br>
+            <h2>Random Potato Facts</h2>
+            <br>
+            <ul>
+                <li>Potatoes were first cultivated in South America more than 7,000 years ago.</li>
+                <li>The world's largest potato weighed 18 pounds and 4 ounces!</li>
+                <li>Potatoes are a good source of vitamins and minerals.</li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <br><br><br>
+            <h2>Meet the Potato Experts</h2>
+            <br>
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="https://media.istockphoto.com/id/1184236867/photo/an-isolated-potato-with-googly-eyes-and-a-face-against-a-black-background.jpg?s=612x612&w=0&k=20&c=LXuoEaJXsQHu-qpbrsvRnr0FMcCZHw-hz9Sb7ns1hZs=" alt="Potato Expert 1" class="img-fluid">
+                    <div class="expert-info">
+                        <h3>Dr. Potato Smith</h3>
+                        <p>Leading Potato Scientist</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="https://media.istockphoto.com/id/1184236867/photo/an-isolated-potato-with-googly-eyes-and-a-face-against-a-black-background.jpg?s=612x612&w=0&k=20&c=LXuoEaJXsQHu-qpbrsvRnr0FMcCZHw-hz9Sb7ns1hZs=" alt="Potato Expert 2" class="img-fluid">
+                    <div class="expert-info">
+                        <h3>Anna The Potato Eater</h3>
+                        <p>Potato Recipe Guru</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="https://media.istockphoto.com/id/1184236867/photo/an-isolated-potato-with-googly-eyes-and-a-face-against-a-black-background.jpg?s=612x612&w=0&k=20&c=LXuoEaJXsQHu-qpbrsvRnr0FMcCZHw-hz9Sb7ns1hZs=" alt="Potato Expert 3" class="img-fluid">
+                    <div class="expert-info">
+                        <h3>John Spudlover</h3>
+                        <p>Potato Enthusiast and Blogger</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+    {% block footer_content %}
+        {% include 'footer.html' %}
+    {% endblock %}
+</body>
+
+</html>

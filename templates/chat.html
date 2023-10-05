@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block head_content %}
+        {% include 'head.html' %}
+    {% endblock %}
+
+    <style>
+        .main-content {
+            padding: 20px;
+        }
+
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .chat-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .message-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+        }
+
+        .user-message {
+            text-align: right;
+        }
+
+        .bot-message {
+            text-align: left;
+        }
+
+        #message-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #live-chat-send-button {
+            margin-top: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    {% block taskbar_content %}
+        {% include 'taskbar.html' %}
+    {% endblock %}
+
+    <div class="main-content">
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">Chat with Bob</h1>
+                <br>
+                <p class="lead text-muted">Our web application provides an exciting opportunity to chat live with Bob, our resident potato expert. Whether you're a potato farmer, a potato lover, or just curious about potatoes, we're here to connect you with Bob in real-time.</p>
+                <p class="lead text-muted">At Our Web App, we believe that there's no better way to explore the world of potatoes than by chatting with Bob. Join our live chat, interact with Bob, and dive into the fascinating world of this versatile and beloved vegetable.</p>
+            </div>
+        </section>
+
+        <div class="container chat-container">
+            <div class="chat-header" style="text-align: left;">
+                Hello!
+            </div>
+
+            {% for message in chat_history %}
+                <p><strong>{{ message.user }}</strong>: {{ message.message }}</p>
+            {% endfor %}
+
+            <form method="POST" action="/chat">
+                <input type="text" name="content" id="message-input"  class="message-input"  placeholder="Type your message...">
+                <button type="submit" id="live-chat-send-button"  class="btn btn-primary">Send</button>
+            </form>
+        </div>
+    </div>
+
+    {% block footer_content %}
+        {% include 'footer.html' %}
+    {% endblock %}
+
+</body>
+</html>

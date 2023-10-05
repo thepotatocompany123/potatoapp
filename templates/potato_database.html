@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block head_content %}
+        {% include 'head.html' %}
+    {% endblock %}
+
+    <style>
+        .expert-info {
+            margin-top: 20px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center horizontally */
+        }
+
+        .search-input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 500px;
+        }
+
+        /* Style the filter dropdown and button */
+        .search-filter {
+            margin-left: 10px;
+        }
+
+        .search-filter label {
+            margin-right: 5px;
+        }
+
+        .search-filter select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+
+        .main-content {
+            padding: 20px;
+        }
+
+        .postcard {
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    {% block taskbar_content %}
+        {% include 'taskbar.html' %}
+    {% endblock %}
+
+    <div class="main-content">
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">Welcome to Our Potato Database</h1>
+                <p class="lead text-muted">Search our extensive database of potatoes and learn more about each of them!</p>
+            </div>
+        </section>
+
+        <!-- Search Form -->
+        <div class="search-bar">
+            <form method="GET" action="{{ url_for('potato_database') }}">
+                <div style="display: flex; align-items: center;">
+                    <input class="search-input" type="text" name="search" placeholder="Search by name">
+                    <div class="search-filter">
+                        <label for="filter">Sort by:</label>
+                        <select id="filter" name="filter">
+                            <option value="name">Name (Default)</option>
+                            <option value="color">Color</option>
+                            <option value="origin">Origin</option>
+                            <option value="price">Price</option>
+                        </select>
+                    </div>
+                    <button class="search-button" type="submit" style="margin-left: 10px">Search</button>
+                </div>
+            </form>
+        </div>
+
+        <br><br>
+
+        {% if message %}
+        <p>{{ message }}</p>
+        {% endif %}
+
+        <div class="row">
+            {% for potato in potatoes %}
+            <div class="col-md-4">
+                <div class="card postcard">
+                    <img src="{{ url_for('serve_image', filename=potato[6]) }}" class="card-img-top"
+                        alt="{{ potato[1] }} Image" width="100" height="250">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ potato[1] }}</h5>
+                        <p class="card-text">Description: {{ potato[2] }}</p>
+                        <p class="card-text">Color: {{ potato[3] }}</p>
+                        <p class="card-text">Origin: {{ potato[4] }}</p>
+                        <p class="card-text">Price: ${{ potato[5] }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    {% block footer_content %}
+        {% include 'footer.html' %}
+    {% endblock %}
+</body>
+
+</html>

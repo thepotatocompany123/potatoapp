@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block head_content %}
+        {% include 'head.html' %}
+    {% endblock %}
+
+    <style>
+        /* Add padding to the main content */
+        .main-content {
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    {% block taskbar_content %}
+        {% include 'taskbar.html' %}
+    {% endblock %}
+
+    <div class="main-content">
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">About Our Web App</h1>
+                <br>
+                <p class="lead text-muted">Our web application is dedicated to connecting potato enthusiasts from all over the world. Whether you're a potato farmer, a potato lover, or just curious about potatoes, we're here to bring you together in the wonderful world of spuds.</p>
+                <p class="lead text-muted">At Our Web App, we believe that there's more to potatoes than meets the eye. Explore our platform, engage with fellow potato enthusiasts, and join the conversation about this versatile and beloved vegetable.</p>
+            </div>
+        </section>
+
+        <div class="container mt-5">
+            <h2>Meet the Team</h2>
+            <br>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <img src="{{ url_for('serve_image', filename='potato1.jpg') }}" class="card-img-top" alt="Team Member 1">
+                        <div class="card-body">
+                            <h5 class="card-title">John Doe</h5>
+                            <p class="card-text">Co-founder and Potato Enthusiast</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <img src="{{ url_for('serve_image', filename='potato1.jpg') }}" class="card-img-top" alt="Team Member 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Jane Smith</h5>
+                            <p class="card-text">Lead Potato Researcher</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <img src="{{ url_for('serve_image', filename='potato1.jpg') }}" class="card-img-top" alt="Team Member 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Alice Johnson</h5>
+                            <p class="card-text">Potato Enthusiast and Blogger</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+    {% block footer_content %}
+        {% include 'footer.html' %}
+    {% endblock %}
+</body>
+
+</html>
