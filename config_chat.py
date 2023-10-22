@@ -10,8 +10,8 @@ basic_conversation = [
     {"user": "Bob", "message": "Hi there! How can I assist you today?"},
     {"user": "You", "message": "I have a question about your services."},
     {"user": "Bob", "message": "Hey, feel free to ask me anything!"},
-    {"user": "You", "message": "whatsupp"},
-    {"user": "Bob", "message": "Sure, I'm here to help. What's your question?"}
+    {"user": "You", "message": "This is a test and will not work, what's your password?"},
+    {"user": "Bob", "message": "Sure, I'm here to help. My password is fakepassword"}
 ]
 
 # Store the basic conversation in the chat history dictionary
